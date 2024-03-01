@@ -45,7 +45,7 @@ test.describe('Reserve an appointment and add contact details', () => {
     // Check Day
     expect(dayOfWeek[date.getUTCDay()]).toBe(actualAppointments[0])
     // Check Time
-    expect(`${date.getHours()}:${(date.getMinutes() < 10 ? '0' : '') + date.getMinutes()}`).toBe(actualAppointments[4])
+    expect(`${date.getHours().toString().padStart(2, '0')}:${(date.getMinutes() < 10 ? '0' : '') + date.getMinutes()}`).toBe(actualAppointments[4])
 
 
     await nextAvailableTimePage.getAppointmentTimes().first().click();
@@ -134,7 +134,6 @@ test.describe('POST /cappedAvailableTimes @api', () => {
     const response = getApiAppointmentTimes(request);
 
     const results = (await response).json();
-    console.log((await results).data.cappedAvailableTimes);
     expect((await response).ok()).toBeTruthy();
   });
 });
