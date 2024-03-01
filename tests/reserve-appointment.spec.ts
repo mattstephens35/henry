@@ -45,7 +45,7 @@ test.describe('Reserve an appointment and add contact details', () => {
     // Check Day
     expect(dayOfWeek[date.getUTCDay()]).toBe(actualAppointments[0])
     // Check Time
-    expect(`${date.getHours().toString().padStart(2, '0')}:${(date.getMinutes() < 10 ? '0' : '') + date.getMinutes()}`).toBe(actualAppointments[4])
+    expect(`${(date.getHours() + 24) % 12 || 12}:${(date.getMinutes() < 10 ? '0' : '') + date.getMinutes()}`).toBe(actualAppointments[4])
 
 
     await nextAvailableTimePage.getAppointmentTimes().first().click();
