@@ -11,6 +11,7 @@ on:
         - all
         - api
         - smoke
+        - appointment
 jobs:
   test:
     timeout-minutes: 60
@@ -24,8 +25,14 @@ jobs:
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
-    - name: Run Playwright tests
+
+    - name: Run All Playwright tests
+      if: github.event.inputs.tests == 'all'
       run: npx playwright test
+
+    - name: Run @Tagged Playwright tests
+      if: github.event.inputs.tests != 'all'
+      run: npx playwright test --grep "${{ github.event.inputs.tests }}" 
     - uses: actions/upload-artifact@v3
       if: always()
       with:

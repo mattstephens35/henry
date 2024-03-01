@@ -12,12 +12,12 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('Reserve an appointment and add contact details', () => {
-  test('should display Next Available Time page', async ({ page }) => {
+  test('should display Next Available Time page @appointment', async ({ page }) => {
     const nextAvailableTimePage = new NextAvailableTimePage(page);
     await expect(nextAvailableTimePage.getHenryLogo()).toBeVisible();
   });
 
-  test('should display Next Steps page', async ({ page }) => {
+  test('should display Next Steps page @appointment', async ({ page }) => {
     const nextAvailableTimePage = new NextAvailableTimePage(page);
 
     await nextAvailableTimePage.getAppointmentTimes().first().click();
@@ -29,7 +29,7 @@ test.describe('Reserve an appointment and add contact details', () => {
 
   const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   const dayOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
-  test('should display Contact Details page', async ({ page, request }) => {
+  test('should display Contact Details page @appointment @smoke', async ({ page, request }) => {
     const nextAvailableTimePage = new NextAvailableTimePage(page);
 
     const response = getApiAppointmentTimes(request);
@@ -58,7 +58,7 @@ test.describe('Reserve an appointment and add contact details', () => {
     await expect(contactDetailsPage.getLegalFirstName()).toBeVisible();
   });
 
-  test('should submit Contact Details', async ({ page }) => {
+  test('should submit Contact Details @appointment', async ({ page }) => {
     const contactDetails = {
       legalFirstName: 'First',
       legalLastName: 'Last',
@@ -87,7 +87,7 @@ test.describe('Reserve an appointment and add contact details', () => {
     await expect(shippingPage.getShippingHeader()).toBeVisible();
   });
 
-  test('should submit Shipping Details', async ({ page }) => {
+  test('should submit Shipping Details @appointment @smoke', async ({ page }) => {
     const contactDetails = {
       legalFirstName: 'First',
       legalLastName: 'Last',
@@ -129,7 +129,7 @@ test.describe('Reserve an appointment and add contact details', () => {
   });
 });
 
-test.describe('POST /cappedAvailableTimes', () => {
+test.describe('POST /cappedAvailableTimes @api', () => {
   test('should return next set of available times', async ({ request }) => {
     const response = getApiAppointmentTimes(request);
 
