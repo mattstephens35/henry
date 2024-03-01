@@ -1,9 +1,16 @@
 name: Playwright Tests
-on:
-  push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+on: 
+  workflow_dispatch:
+    inputs:
+      tests:
+        required: true
+        default: all
+        type: choice
+        description: Tags to run
+        options: 
+        - all
+        - api
+        - smoke
 jobs:
   test:
     timeout-minutes: 60
